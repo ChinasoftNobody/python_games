@@ -12,6 +12,7 @@ class TankGame(RelativeLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.check = False
+        self.clock_event = None
 
     def on_touch_down(self, touch):
         if not self.check:
@@ -19,10 +20,10 @@ class TankGame(RelativeLayout):
             self.clear_widgets()
             tank = Factory.TankWidget()
             self.tank = tank
-            Clock.schedule_interval(self.tank.update, 1.0 / 60.0)
+            event = Clock.schedule_interval(self.tank.update, 1.0 / 60.0)
+            self.clock_event = event
             self.add_widget(tank)
             tank.shot()
             self.check = True
-
         return True
 

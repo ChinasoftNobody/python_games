@@ -5,20 +5,20 @@ TankGame:
         text:'TANK CRAFT'
 
 <TankWidget>:
-    width:40
-    height:40
+    size_hint:None,None
+    size:(40,40)
     canvas:
         Rectangle:
-            pos:self.pos_x,self.pos_y
+            pos:self.x,self.y
             size:40,25
 
         Rectangle:
-            pos:self.pos_x,self.pos_y
+            pos:self.x + 20-2.5,self.y + 25
             size:5,15
 
 <BulletWidget>:
-    width:4
-    height:4
+    size_hint:None,None
+    size:4,4
     canvas:
         Ellipse:
             pos:self.pos_x,self.pos_y
