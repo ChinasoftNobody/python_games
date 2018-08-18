@@ -32,10 +32,10 @@ class TankWidget(Widget):
         # bounce off top and bottom
         _x = 0
         _y = 0
-        if (self.y > 0):
+        if self.y > 0:
             _y = -1
 
         # bounce off left and right
-        if (self.x > 0):
+        if self.x > 0:
             _x = -1
         self.move(_x, _y)
