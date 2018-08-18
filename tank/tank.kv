@@ -1,5 +1,5 @@
 TankGame:
-<TankGame@BoxLayout>:
+<TankGame@RelativeLayout>:
     size:root.size
     Label:
         text:'TANK CRAFT'
@@ -9,17 +9,17 @@ TankGame:
     height:40
     canvas:
         Rectangle:
-            pos:self.size[0]/2-20,self.size[1]/2-12.5
+            pos:self.pos_x,self.pos_y
             size:40,25
 
         Rectangle:
-            pos:self.size[0]/2-2.5,self.size[1]/2+12.5
+            pos:self.pos_x,self.pos_y
             size:5,15
 
 <BulletWidget>:
-    width:25
-    height:25
+    width:4
+    height:4
     canvas:
-        Rectangle:
-            pos:0,0
-            size:20,20
+        Ellipse:
+            pos:self.pos_x,self.pos_y
+            size:4,4

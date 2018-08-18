@@ -1,13 +1,16 @@
 # -*-coding:utf-8-*-
 
 from kivy.app import App
+from kivy.clock import Clock
+
 from tank.TankGame import TankGame
 
 
 class TankApp(App):
 
     def build(self):
-        return TankGame()
+        tank_game = TankGame()
+        return tank_game
 
 
 if __name__ == '__main__':
