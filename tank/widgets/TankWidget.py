@@ -1,3 +1,5 @@
+from functools import partial
+
 from kivy.clock import Clock
 from kivy.factory import Factory
 from kivy.properties import NumericProperty, ReferenceListProperty
@@ -8,34 +10,53 @@ from tank.widgets import BulletWidget
 
 
 class TankWidget(Widget):
+    moving = False
+    move_clock_event = None
+    speed = 0
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.pos = (100, 100)
         self.bullet = None
 
     def shot(self):
-        # parent.add_widget(Factory.BulletWidget())
         bullet = Factory.BulletWidget()
         self.parent.add_widget(bullet)
         self.bullet = bullet
-
         pass
 
     def move(self, x, y):
-        if self.collide_widget(self.bullet):
-            Clock.unschedule(self.parent.clock_event)
-            return
+        for child in self.parent.children:
+            if self is not child and self.collide_widget(child):
+                return
         self.pos = Vector(x, y) + self.pos
 
-    def update(self, dt):
-        # bounce off top and bottom
-        _x = 0
-        _y = 0
-        if self.y > 0:
-            _y = -1
+    def on_key_down(self, keyboard, keycode, *args):
+        move_keys = ['left', 'right', 'up', 'down']
+        if keycode[1] not in move_keys:
+            return
+        if not self.moving:
+            self.moving = True
+            x, y = 0, 0
+            if keycode[1] == move_keys[0]:
+                x = -1
+            elif keycode[1] == move_keys[1]:
+                x = 1
+            elif keycode[1] == move_keys[2]:
+                y = 1
+            elif keycode[1] == move_keys[3]:
+                y = -1
+            else:
+                pass
+            self.move_clock_event = Clock.schedule_interval(partial(self.move_update, x, y), self.speed)
 
-        # bounce off left and right
-        if self.x > 0:
-            _x = -1
-        self.move(_x, _y)
+    def on_key_up(self, keyboard, keycode):
+        move_keys = ['left', 'right', 'up', 'down']
+        if keycode[1] in move_keys:
+            Clock.unschedule(self.move_clock_event)
+            self.move_clock_event = None
+            self.moving = False
+
+    def move_update(self, value, key, dt):
+        print(value, key, dt)
+        self.move(value, key)
+        pass
