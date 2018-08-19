@@ -1,4 +1,3 @@
-from apport import warning
 from kivy import logger
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -8,7 +7,6 @@ from kivy.uix.relativelayout import RelativeLayout
 
 from tank import CommonUtil
 from tank.widgets import TankWidget
-from kivy.uix.widget import Widget
 
 
 class TankGame(RelativeLayout):
@@ -31,12 +29,12 @@ class TankGame(RelativeLayout):
 
     def on_key_down_handle(self, keyboard, keycode, text, modifiers):
         if CommonUtil.has_attr(self, 'on_key_down'):
-            self.on_touch_down(keyboard, keycode, text, modifiers)
+            self.on_key_down(keyboard, keycode, text, modifiers)
         if self.children:
             for child in self.children:
                 if CommonUtil.has_attr(child, 'on_key_down'):
                     child.on_key_down(keyboard, keycode, text, modifiers)
-                    logger.Logger.info(repr(child.__class__) + 'register event on_key_down')
+                    logger.Logger.debug(repr(child.__class__) + 'register event on_key_down')
         return True
 
     def on_key_up_handle(self, keyboard, keycode):
@@ -46,7 +44,7 @@ class TankGame(RelativeLayout):
             for child in self.children:
                 if CommonUtil.has_attr(child,'on_key_up'):
                     child.on_key_up(keyboard, keycode)
-                    logger.Logger.info(repr(child.__class__) + 'register event on_key_up')
+                    logger.Logger.debug(repr(child.__class__) + 'register event on_key_up')
         return True
 
     def on_key_up(self, keyboard, keycode):

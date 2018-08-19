@@ -2,6 +2,7 @@
 
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.config import ConfigParser
 
 from tank.TankGame import TankGame
 

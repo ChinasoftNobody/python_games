@@ -57,6 +57,5 @@ class TankWidget(Widget):
             self.moving = False
 
     def move_update(self, value, key, dt):
-        print(value, key, dt)
         self.move(value, key)
         pass
