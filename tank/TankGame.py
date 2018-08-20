@@ -33,8 +33,8 @@ class TankGame(RelativeLayout):
         if self.children:
             for child in self.children:
                 if CommonUtil.has_attr(child, 'on_key_down'):
-                    child.on_key_down(keyboard, keycode, text, modifiers)
                     logger.Logger.debug(repr(child.__class__) + 'register event on_key_down')
+                    return child.on_key_down(keyboard, keycode, text, modifiers)
         return True
 
     def on_key_up_handle(self, keyboard, keycode):
@@ -43,8 +43,8 @@ class TankGame(RelativeLayout):
         if self.children:
             for child in self.children:
                 if CommonUtil.has_attr(child,'on_key_up'):
-                    child.on_key_up(keyboard, keycode)
                     logger.Logger.debug(repr(child.__class__) + 'register event on_key_up')
+                    return child.on_key_up(keyboard, keycode)
         return True
 
     def on_key_up(self, keyboard, keycode):
@@ -55,3 +55,5 @@ class TankGame(RelativeLayout):
             self.tank = tank
             self.add_widget(tank)
             self.check = True
+            return True
+        return True
