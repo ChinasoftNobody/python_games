@@ -1,7 +1,3 @@
-class CommonUtil:
-    @staticmethod
-    def has_attr(target, key):
-        try:
-            return object.__getattribute__(target, key)
-        except AttributeError:
-            return None
+GAME_WIDTH = 800
+GAME_HEIGHT = 600
+GAME_TITLE = 'TankCraft'
